@@ -7,11 +7,11 @@ services:
     image: postgres
     restart: always
     volumes:
-      - /Users/mohamed/Desktop/db-docker/volumes/nestjs-api-boilerplate-data:/var/lib/postgresql/data
+      - /Users/example/path:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: nestjsapiboilerplate
+      POSTGRES_USER: your-postgres-username
+      POSTGRES_PASSWORD: your-postgres-password
+      POSTGRES_DB: your-postgres-db-name
     ports: 
       - "5432:5432"
 
