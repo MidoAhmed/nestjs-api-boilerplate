@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "docker:up": "docker-compose -p nestjs-api-boilerplate up -d",
+    "docker:down": "docker-compose -p nestjs-api-boilerplate down"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",
@@ -30,7 +32,7 @@
   "devDependencies": {
     "@nestjs/cli": "^6.13.2",
     "@nestjs/schematics": "^6.8.1",
-    "@nestjs/testing": "^6.10.14",
+    "@nestjs/testing": "^7.0.1",
     "@types/express": "^4.17.2",
     "@types/jest": "25.1.2",
     "@types/node": "^13.1.6",

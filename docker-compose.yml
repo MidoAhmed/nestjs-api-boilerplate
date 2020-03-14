@@ -1,0 +1,22 @@
+
+version: '3.1'
+
+services:
+
+  db_postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - /Users/mohamed/Desktop/db-docker/volumes/nestjs-api-boilerplate-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nestjsapiboilerplate
+    ports: 
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
