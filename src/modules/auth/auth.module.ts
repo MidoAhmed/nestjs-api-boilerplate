@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import * as config from 'config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepository } from './repositories/user.repository';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 const jwtConfig = config.get('jwt');
 
@@ -20,11 +21,8 @@ const jwtConfig = config.get('jwt');
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
-  controllers: [
-    AuthController
-  ],
-  providers: [
-    AuthService
-  ]
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
+  exports: [],
 })
 export class AuthModule {}
