@@ -5,8 +5,8 @@ import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig),
-    AuthModule
+    AuthModule, 
+    TypeOrmModule.forRoot(typeOrmConfig)
   ],
   controllers: [],
   providers: [],
