@@ -17,7 +17,7 @@ git clone https://github.com/MidoAhmed/nestjs-api-boilerplate my-new-project
 # 2. Enter your newly-cloned folder.
 cd my-new-project
 
-# 3. Install dependencies. 
+# 3. Install dependencies.
 npm
 
 # 4. Run development server and open http://localhost:3000
@@ -52,6 +52,13 @@ npm start:dev
 
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
+</dl>
+
+## WIP/Comming Features
+
+<dl>
+  <dt><b>TypeScript source code Documentation</b></dt>
+  <dd>Use a documentation generator for TypeScript projects such as or other alternative - https://typedoc.org/</dd>
 </dl>
 
 ## Documentation
