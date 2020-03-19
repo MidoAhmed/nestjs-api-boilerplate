@@ -1,3 +1,1 @@
-/**
- * guards
- */
+export * from './auth.guard';
