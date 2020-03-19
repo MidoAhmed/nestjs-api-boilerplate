@@ -1,9 +1,9 @@
-import { Controller, Post, Body, ValidationPipe, Get, ParseIntPipe, Param, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, ValidationPipe, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
-import { AuthUser } from 'src/decorators/auth-user.decorator';
 import { UserEntity } from '../user.entity';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from '../../../guards';
+import { AuthUser } from '../../../decorators';
 
 @Controller('auth')
 export class AuthController {
