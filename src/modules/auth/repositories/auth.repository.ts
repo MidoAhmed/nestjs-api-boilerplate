@@ -1,22 +1,29 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
-import { UserEntity } from '../user.entity';
+import { UserEntity } from '../../user/user.entity';
+import { LoginCredentialsDto } from '../dto/login-credentials.dto';
+import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
+import { UserDto } from '../../user/dto/user.dto';
 
 @EntityRepository(UserEntity)
-export class UserRepository extends Repository<UserEntity> {
+export class AuthRepository extends Repository<UserEntity> {
     
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { username, password } = authCredentialsDto;
+  async signUp(registerCredentialsDto: RegisterCredentialsDto): Promise<UserDto> {
+    const { username, password } = registerCredentialsDto;
 
     const user = new UserEntity();
     user.username = username;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password, user.salt);
+    user.firstName = registerCredentialsDto.firstName;
+    user.lastName = registerCredentialsDto.lastName;
+    user.phone = registerCredentialsDto.phone;
+
 
     try {
-      await user.save();
+      const  registredUser = await user.save();
+      return new UserDto(registredUser);
     } catch (error) {
       if (error.code === '23505') { // duplicate username
         throw new ConflictException('Username already exists');
@@ -26,8 +33,8 @@ export class UserRepository extends Repository<UserEntity> {
     }
   }
 
-  async validateUserPassword(authCredentialsDto: AuthCredentialsDto): Promise<string> {
-    const { username, password } = authCredentialsDto;
+  async validateUserPassword(loginCredentialsDto: LoginCredentialsDto): Promise<string> {
+    const { username, password } = loginCredentialsDto;
     const user = await this.findOne({ username });
 
     if (user && await user.validatePassword(password)) {
