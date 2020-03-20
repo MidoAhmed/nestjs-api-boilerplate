@@ -6,7 +6,7 @@ import { UserEntity } from 'src/modules/user/user.entity';
 import { AuthRepository } from '../repositories/auth.repository';
 import { LoginCredentialsDto } from '../dto/login-credentials.dto';
 import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
-import { UserDto } from 'src/modules/user/dto/user.dto';
+import { UserDto } from '../../user/dto/user.dto';
 
 
 @Injectable()
