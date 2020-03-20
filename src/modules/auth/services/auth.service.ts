@@ -1,10 +1,12 @@
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { UserEntity } from 'src/modules/user/user.entity';
 import { AuthRepository } from '../repositories/auth.repository';
+import { LoginCredentialsDto } from '../dto/login-credentials.dto';
+import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
+import { UserDto } from 'src/modules/user/dto/user.dto';
 
 
 @Injectable()
@@ -12,18 +14,16 @@ export class AuthService {
   private logger = new Logger('AuthService');
 
   constructor(
-            @InjectRepository(AuthRepository) private userRepository: AuthRepository,
+            @InjectRepository(AuthRepository) private authRepository: AuthRepository,
             private jwtService: JwtService,
           ) {}
 
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    return this.userRepository.signUp(authCredentialsDto);
+  async signUp(registerCredentialsDto: RegisterCredentialsDto): Promise<UserDto> {
+    return this.authRepository.signUp(registerCredentialsDto);
   }
 
-  async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-    const username = await this.userRepository.validateUserPassword(
-      authCredentialsDto,
-    );
+  async signIn(loginCredentialsDto: LoginCredentialsDto): Promise<{ accessToken: string }> {
+    const username = await this.authRepository.validateUserPassword(loginCredentialsDto);
 
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
@@ -36,9 +36,7 @@ export class AuthService {
     return { accessToken };
   }
 
-  getAuthenticatedUser(user: UserEntity) : UserEntity{
-    delete user.password;
-    delete user.salt;
-    return user;
+  getAuthenticatedUser(user: UserEntity) : UserDto{
+    return new UserDto(user);
   }
 }

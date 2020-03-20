@@ -1,37 +1,22 @@
-/* import { RoleType } from '../../../common/constants/role-type';
-import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { UserEntity } from '../user.entity';
 
-export class UserDto extends AbstractDto {
-   
-    firstName: string;
-
+export class UserDto {
     
-    lastName: string;
+    id: number;
 
-    
     username: string;
 
-    
-    role: RoleType;
+    firstName: string;
 
-    ß
-    email: string;
+    lastName: string;
 
-    
-    avatar: string;
-
-    
     phone: string;
 
     constructor(user: UserEntity) {
-        super(user);
+        this.id = user.id;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
-        this.role = user.role;
-        this.email = user.email;
-        this.avatar = user.avatar;
+        this.username = user.username;
         this.phone = user.phone;
     }
 }
- */

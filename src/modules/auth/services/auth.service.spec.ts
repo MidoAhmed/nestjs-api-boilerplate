@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { UserRepository } from '../repositories/user.repository';
+import { AuthRepository } from '../repositories/auth.repository';
 
 const mockJwtConfig = {
   secret: 'mock-secret-key',
@@ -21,7 +21,7 @@ describe('AuthService', () => {
           },
         }),
       ],
-      providers: [AuthService, UserRepository],
+      providers: [AuthService, AuthRepository],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
