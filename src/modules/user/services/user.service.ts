@@ -2,10 +2,13 @@ import {
   Injectable,
   Logger,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '../repositories/user.repository';
 import { UsersDto } from '../dto/users.dto';
+import { UserEntity } from '../user.entity';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -25,5 +28,15 @@ export class UserService {
       this.logger.error(`Failed to get users`, error.stack);
       throw new InternalServerErrorException();
     }
+  }
+
+  async getUserById(id: number, user: UserEntity): Promise<UserDto> {
+    const found = await this.userRepository.findOne({ where: { id, userId: user.id } });
+
+    if (!found) {
+      throw new NotFoundException(`User with ID "${id}" not found`);
+    }
+
+    return new UserDto(found);
   }
 }
