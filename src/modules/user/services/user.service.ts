@@ -31,12 +31,25 @@ export class UserService {
   }
 
   async getUserById(id: number, user: UserEntity): Promise<UserDto> {
-    const found = await this.userRepository.findOne({ where: { id, userId: user.id } });
+    const found = await this.userRepository.findOne({ where: { id } });
 
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
 
     return new UserDto(found);
+  }
+
+  async deleteUser(id: number, user: UserEntity): Promise<any> {
+    const result = await this.userRepository.delete({ id });
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`User with ID "${id}" not found`);
+    }
+
+    return Promise.resolve({
+      result: result,
+      status: 'succes'
+    });
   }
 }
