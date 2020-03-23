@@ -9,6 +9,7 @@ import { UserRepository } from '../repositories/user.repository';
 import { UsersDto } from '../dto/users.dto';
 import { UserEntity } from '../user.entity';
 import { UserDto } from '../dto/user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -51,5 +52,10 @@ export class UserService {
       result: result,
       status: 'succes'
     });
+  }
+
+
+  async createUser(createUserDto: CreateUserDto, user: UserEntity): Promise<UserDto> {
+    return this.userRepository.createUser(createUserDto, user);
   }
 }

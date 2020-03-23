@@ -1,16 +1,17 @@
 import {
-  IsString,
-  MinLength,
-  MaxLength,
-  Matches,
-  IsNotEmpty,
-  IsPhoneNumber,
-  IsOptional,
-  IsDefined,
-} from 'class-validator';
+    IsString,
+    MinLength,
+    MaxLength,
+    Matches,
+    IsNotEmpty,
+    IsPhoneNumber,
+    IsOptional,
+    IsDefined,
+  } from 'class-validator';
 
-export class RegisterCredentialsDto {
+export class CreateUserDto {
 
+    
   @IsDefined()  
   @IsString()
   @MinLength(4)
@@ -25,7 +26,7 @@ export class RegisterCredentialsDto {
   @IsNotEmpty()
   readonly lastName: string;
 
-  @IsDefined()  
+  @IsDefined()
   @IsString()
   @MinLength(8)
   @MaxLength(20)

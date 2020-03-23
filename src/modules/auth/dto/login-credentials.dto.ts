@@ -1,11 +1,14 @@
-import { IsString, MinLength, MaxLength, Matches } from 'class-validator';
+import { IsString, MinLength, MaxLength, Matches, IsDefined } from 'class-validator';
 
 export class LoginCredentialsDto {
+
+  @IsDefined()
   @IsString()
   @MinLength(4)
   @MaxLength(20)
   readonly username: string;
 
+  @IsDefined()  
   @IsString()
   @MinLength(8)
   @MaxLength(20)
