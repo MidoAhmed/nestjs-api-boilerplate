@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Get('/:id')
-  getTaskById(@Param('id', ParseIntPipe) id: number, @AuthUser() user: UserEntity): Promise<UserDto> {
+  getUser(@Param('id', ParseIntPipe) id: number, @AuthUser() user: UserEntity): Promise<UserDto> {
     return this.userService.getUserById(id, user);
   }
 
