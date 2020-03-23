@@ -10,6 +10,7 @@ import {
   Body,
   Logger,
   UsePipes,
+  Put,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UsersDto } from '../dto/users.dto';
@@ -18,6 +19,7 @@ import { UserDto } from '../dto/user.dto';
 import { AuthUser } from '../../../decorators';
 import { UserEntity } from '../user.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard())
@@ -50,5 +52,14 @@ export class UserController {
   deleteUser(@Param('id', ParseIntPipe) id: number, 
              @AuthUser() user: UserEntity): Promise<any> {
     return this.userService.deleteUser(id, user);
+  }
+
+  @Put('/:id')
+  updateUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+    @AuthUser() user: UserEntity,
+  ): Promise<any> {
+    return this.userService.updateUser(id, updateUserDto, user);
   }
 }
