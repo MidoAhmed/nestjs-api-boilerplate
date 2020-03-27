@@ -10,19 +10,12 @@ import {
 
 export class UpdateUserDto {
 
-    
-  @IsDefined()  
   @IsString()
-  @MinLength(4)
-  @MaxLength(20)
-  readonly username: string;
-
-  @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly firstName: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly lastName: string;
 
   @IsPhoneNumber('ZZ')

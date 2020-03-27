@@ -4,6 +4,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UserDto } from '../dto/user.dto';
 import { InternalServerErrorException, Logger, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
+import { plainToClass } from 'class-transformer';
 
 @EntityRepository(UserEntity)
 export class UserRepository extends Repository<UserEntity> {
@@ -23,12 +24,13 @@ export class UserRepository extends Repository<UserEntity> {
 
         try {
           const  createdUser = await userEntity.save();
-          return new UserDto(createdUser);
+          return plainToClass(UserDto, createdUser);
         } catch (error) {
-            if (error.code === '23505') { // duplicate username
+            this.logger.error(error.message, error.stack);
+            if (error.code === '23505') { 
+                // duplicate username
                 throw new ConflictException('Username already exists');
             } else {
-                this.logger.error(`Failed to create a user for user "${user.username}". Data: ${CreateUserDto}`, error.stack);
                 throw new InternalServerErrorException();
             }
         }

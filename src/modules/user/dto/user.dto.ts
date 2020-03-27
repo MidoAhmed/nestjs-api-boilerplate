@@ -1,22 +1,28 @@
-import { UserEntity } from '../user.entity';
+import { Exclude, Expose } from 'class-transformer';
 
+@Exclude()
 export class UserDto {
     
+    @Expose()
     id: number;
 
+    @Expose()
     username: string;
 
+    @Expose()
     firstName: string;
 
+    @Expose()
     lastName: string;
 
+    @Expose()
     phone: string;
+    
+    password: string;
 
-    constructor(user: UserEntity) {
-        this.id = user.id;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.username = user.username;
-        this.phone = user.phone;
-    }
+    salt: string;
+
+    /* constructor(props) {
+        Object.assign(this, props);
+    } */
 }

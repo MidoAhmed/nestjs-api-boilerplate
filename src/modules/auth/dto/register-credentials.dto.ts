@@ -18,11 +18,11 @@ export class RegisterCredentialsDto {
   readonly username: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly firstName: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly lastName: string;
 
   @IsDefined()  

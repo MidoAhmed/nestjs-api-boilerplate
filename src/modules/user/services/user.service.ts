@@ -11,6 +11,7 @@ import { UserEntity } from '../user.entity';
 import { UserDto } from '../dto/user.dto';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -20,26 +21,26 @@ export class UserService {
     @InjectRepository(UserRepository) private userRepository: UserRepository,
   ) {}
 
-  async getUsers(): Promise<UsersDto> {
+  async getUsers(): Promise<UserDto[]> {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
     try {
       const users = await queryBuilder.getMany();
-      return new UsersDto(users);
+      return plainToClass(UserDto, users);
     } catch (error) {
-      this.logger.error(`Failed to get users`, error.stack);
+      this.logger.error(error.message, error.stack);
       throw new InternalServerErrorException();
     }
   }
 
   async getUserById(id: number, user: UserEntity): Promise<UserDto> {
-    const found = await this.userRepository.findOne({ where: { id } });
+    const found : UserEntity = await this.userRepository.findOne({ where: { id } });
 
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
 
-    return new UserDto(found);
+    return plainToClass(UserDto, found);
   }
 
   async deleteUser(id: number, user: UserEntity): Promise<any> {
@@ -78,8 +79,9 @@ export class UserService {
     try {
       const result = await this.userRepository.update(id, userEntity);
       return result;
+      // return plainToClass(UserDto, user);
     } catch (error) {
-      this.logger.error(`Failed to update a user. Data: ${updateUserDto}`, error.stack);
+      this.logger.error(error.message, error.stack);
       throw new InternalServerErrorException();
     }
   }
