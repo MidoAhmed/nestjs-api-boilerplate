@@ -1,7 +1,7 @@
 import { Controller, Post, Body, ValidationPipe, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { AuthGuard } from '../../../guards';
-import { AuthUser } from '../../../decorators';
+import { AuthGuard } from '../../../commun/guards';
+import { AuthUser } from '../../../commun/decorators';
 import { UserEntity } from '../../user/user.entity';
 import { LoginCredentialsDto } from '../dto/login-credentials.dto';
 import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
