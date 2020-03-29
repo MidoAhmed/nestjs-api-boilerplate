@@ -16,7 +16,7 @@ import { UserService } from '../services/user.service';
 import { UsersDto } from '../dto/users.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserDto } from '../dto/user.dto';
-import { AuthUser } from '../../../decorators';
+import { AuthUser } from '../../../commun/decorators';
 import { UserEntity } from '../user.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -29,7 +29,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  getUsers(): Promise<UsersDto> {
+  getUsers(): Promise<UserDto[]> {
     return this.userService.getUsers();
   }
 
@@ -44,7 +44,6 @@ export class UserController {
     @Body() createUserDto: CreateUserDto,
     @AuthUser() user: UserEntity
   ): Promise<UserDto> {
-    this.logger.verbose(`User "${user.username}" creating a new task. Data: ${JSON.stringify(createUserDto)}`);
     return this.userService.createUser(createUserDto, user);
   }
 

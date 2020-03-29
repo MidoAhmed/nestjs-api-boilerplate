@@ -7,6 +7,7 @@ import { AuthRepository } from '../repositories/auth.repository';
 import { LoginCredentialsDto } from '../dto/login-credentials.dto';
 import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
 import { UserDto } from '../../user/dto/user.dto';
+import { plainToClass } from 'class-transformer';
 
 
 @Injectable()
@@ -37,6 +38,6 @@ export class AuthService {
   }
 
   getAuthenticatedUser(user: UserEntity) : UserDto{
-    return new UserDto(user);
+    return  plainToClass(UserDto,  user);
   }
 }
