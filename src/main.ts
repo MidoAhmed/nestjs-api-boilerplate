@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import * as config from 'config';
 import { setupSwagger } from './api-docs.swagger';
 import { Logger } from '@nestjs/common';
+import { TransformInterceptor } from './commun/interceptors/transform.interceptor';
+import { WrapInterceptor } from './commun/interceptors/wrap.interceptor';
 
 async function bootstrap() {
   const serverConfig = config.get('server');
@@ -12,6 +14,9 @@ async function bootstrap() {
   // global prefix
   app.setGlobalPrefix('api/v1');
   
+  // app.useGlobalInterceptors(new TransformInterceptor(), new WrapInterceptor())
+
+
   // listen on port
   const port = process.env.PORT || serverConfig.port;
 
