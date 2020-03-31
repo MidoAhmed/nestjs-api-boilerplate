@@ -61,6 +61,11 @@ npm start:dev
   <dd>Use a documentation generator for TypeScript projects such as or other alternative - https://typedoc.org/</dd>
 </dl>
 
+<dl>
+  <dt><b>Caching</b></dt>
+  <dd>In-memory cache/ Redis</dd>
+</dl>
+
 ## Documentation
 
 This project includes a `docs` folder with more details on:

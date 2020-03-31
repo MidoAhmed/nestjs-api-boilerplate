@@ -12,11 +12,11 @@ export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
 
     return next
-      .handle()
-      .pipe(
-        tap(() => this.logger.log('TransformInterceptor intercept response...')),
-        map(res => (isObject(res) ? this.transformResponse(res) : res))
-      );
+            .handle()
+            .pipe(
+                tap(() => this.logger.log('TransformInterceptor intercept response...')),
+                map(res => (isObject(res) ? this.transformResponse(res) : res))
+            );
   }
 
   transformResponse(response) {
