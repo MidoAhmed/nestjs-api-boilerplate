@@ -18,7 +18,7 @@ export class UserService {
   private logger = new Logger('UserService');
 
   constructor(
-    @InjectRepository(UserRepository) private userRepository: UserRepository,
+    @InjectRepository(UserRepository) private readonly userRepository: UserRepository,
   ) {}
 
   async getUsers(): Promise<UserDto[]> {
