@@ -13,7 +13,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { UsersDto } from '../dto/users.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { UserDto } from '../dto/user.dto';
 import { AuthUser } from '../../../commun/decorators';
@@ -58,7 +57,7 @@ export class UserController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
     @AuthUser() user: UserEntity,
-  ): Promise<any> {
+  ): Promise<UserDto> {
     return this.userService.updateUser(id, updateUserDto, user);
   }
 }

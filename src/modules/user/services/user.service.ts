@@ -11,7 +11,7 @@ import { UserEntity } from '../user.entity';
 import { UserDto } from '../dto/user.dto';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { plainToClass } from 'class-transformer';
+import { plainToClass, classToPlain } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -25,7 +25,12 @@ export class UserService {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
     try {
-      const users = await queryBuilder.getMany();
+      const users = await queryBuilder
+                          // .innerJoinAndSelect("user.tasks", "tasks")
+                          .leftJoinAndSelect("user.tasks", "tasks")
+                          .getMany();
+
+      // return users.map(item => plainToClass(UserDto, item));
       return plainToClass(UserDto, users);
     } catch (error) {
       this.logger.error(error.message, error.stack);
@@ -39,7 +44,7 @@ export class UserService {
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
-
+    
     return plainToClass(UserDto, found);
   }
 
@@ -61,25 +66,18 @@ export class UserService {
     return this.userRepository.createUser(createUserDto, user);
   }
 
-  async updateUser(id: number, updateUserDto: UpdateUserDto, user: UserEntity): Promise<any> {
-
-    const { firstName, lastName, phone } = updateUserDto;
+  async updateUser(id: number, updateUserDto: UpdateUserDto, user: UserEntity): Promise<UserDto> {
     
-    const userEntity = new UserEntity();
-    // userEntity.username = username;
-    userEntity.firstName = firstName;
-    userEntity.lastName = lastName;
-    userEntity.phone = phone;
-
     const found = await this.userRepository.findOne({ where: { id } });
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
 
     try {
-      const result = await this.userRepository.update(id, userEntity);
-      return result;
-      // return plainToClass(UserDto, user);
+      this.userRepository.merge(found, updateUserDto);
+      const result = await this.userRepository.save(found);
+      // const result = await this.userRepository.update({id: id}, updateUserDto);
+      return plainToClass(UserDto, result);
     } catch (error) {
       this.logger.error(error.message, error.stack);
       throw new InternalServerErrorException();
