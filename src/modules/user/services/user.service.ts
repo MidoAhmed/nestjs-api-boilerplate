@@ -25,7 +25,12 @@ export class UserService {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
     try {
-      const users = await queryBuilder.getMany();
+      const users = await queryBuilder
+                          // .innerJoinAndSelect("user.tasks", "tasks")
+                          .leftJoinAndSelect("user.tasks", "tasks")
+                          .getMany();
+
+      // return users.map(item => plainToClass(UserDto, item));
       return plainToClass(UserDto, users);
     } catch (error) {
       this.logger.error(error.message, error.stack);
@@ -39,7 +44,7 @@ export class UserService {
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
-
+    
     return plainToClass(UserDto, found);
   }
 
@@ -77,7 +82,10 @@ export class UserService {
     }
 
     try {
-      const result = await this.userRepository.update(id, userEntity);
+      // const result = await this.userRepository.update(id, userEntity);
+      // const res = plainToClass(found, updateUserDto);
+      console.log(found);
+      const result = await this.userRepository.save(found);
       return result;
       // return plainToClass(UserDto, user);
     } catch (error) {

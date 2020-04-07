@@ -1,6 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { Expose } from 'class-transformer';
 import { Task } from '../task/task.entity';
 
 @Entity({ name: 'user' })
