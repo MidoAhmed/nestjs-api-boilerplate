@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { UserEntity } from '../user/user.entity';
 
@@ -21,4 +21,16 @@ export class Task extends BaseEntity {
 
   @Column()
   userId: number;
+
+  @CreateDateColumn({
+    type: 'timestamp without time zone',
+    name: 'created_at',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+      type: 'timestamp without time zone',
+      name: 'updated_at',
+  })
+  updatedAt: Date;
 }
