@@ -1,5 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { Task } from 'src/modules/task/task.entity';
+import { UserRole } from '../user-role.enum';
 
 @Exclude()
 export class UserDto {
@@ -25,6 +26,9 @@ export class UserDto {
 
     @Expose()
     tasks: Task[];
+
+    @Expose()
+    role: UserRole
 
     /* constructor(props) {
         Object.assign(this, props);

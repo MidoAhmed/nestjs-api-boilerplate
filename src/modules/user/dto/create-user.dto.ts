@@ -7,7 +7,9 @@ import {
     IsPhoneNumber,
     IsOptional,
     IsDefined,
+    IsIn,
   } from 'class-validator';
+import { UserRole } from '../user-role.enum';
 
 export class CreateUserDto {
 
@@ -38,4 +40,8 @@ export class CreateUserDto {
   @IsPhoneNumber('ZZ')
   @IsOptional()
   phone: string;
+
+  @IsOptional()
+  @IsIn([UserRole.ADMIN, UserRole.MANAGER, UserRole.USER, UserRole.GHOST, UserRole.GUEST])
+  role: UserRole;
 }
