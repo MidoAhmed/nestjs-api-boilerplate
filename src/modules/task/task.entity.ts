@@ -1,11 +1,11 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Entity, Column, ManyToOne } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { UserEntity } from '../user/user.entity';
+import { AbstractEntity } from 'src/commun/abstract.entity';
+import { TaskDto } from './dto/task.dto';
 
 @Entity({ name: 'task' })
-export class Task extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class TaskEntity extends AbstractEntity{
 
   @Column()
   title: string;
@@ -19,18 +19,7 @@ export class Task extends BaseEntity {
   @ManyToOne(type => UserEntity, user => user.tasks, { eager: false})
   user: UserEntity;
 
-  @Column()
+  @Column({nullable: true})
   userId: number;
 
-  @CreateDateColumn({
-    type: 'timestamp without time zone',
-    name: 'created_at',
-  })
-  createdAt: Date;
-
-  @UpdateDateColumn({
-      type: 'timestamp without time zone',
-      name: 'updated_at',
-  })
-  updatedAt: Date;
 }

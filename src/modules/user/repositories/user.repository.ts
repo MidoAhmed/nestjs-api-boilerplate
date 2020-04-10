@@ -24,7 +24,7 @@ export class UserRepository extends Repository<UserEntity> {
         userEntity.role = role;
 
         try {
-          const  createdUser = await userEntity.save();
+          const  createdUser = await this.save(userEntity);
           return plainToClass(UserDto, createdUser);
         } catch (error) {
             this.logger.error(error.message, error.stack);

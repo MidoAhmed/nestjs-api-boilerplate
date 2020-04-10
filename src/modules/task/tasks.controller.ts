@@ -4,10 +4,10 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enum';
 import { UserEntity } from '../user/user.entity';
 import { AuthUser } from 'src/commun/decorators';
+import { TaskDto } from './dto/task.dto';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
@@ -20,7 +20,7 @@ export class TasksController {
   getTasks(
     @Query(ValidationPipe) filterDto: GetTasksFilterDto,
     @AuthUser() user: UserEntity
-  ): Promise<Task[]> {
+  ): Promise<TaskDto[]> {
     this.logger.verbose(`User "${user.username}" retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
     return this.tasksService.getTasks(filterDto, user);
   }
@@ -29,8 +29,8 @@ export class TasksController {
   getTaskById(
     @Param('id', ParseIntPipe) id: number,
     @AuthUser() user: UserEntity
-  ): Promise<Task> {
-    return this.tasksService.getTaskById(id, user);
+  ): Promise<TaskDto> {
+    return this.tasksService.getTaskById( id, user );
   }
 
   @Post()
@@ -38,7 +38,7 @@ export class TasksController {
   createTask(
     @Body() createTaskDto: CreateTaskDto,
     @AuthUser() user: UserEntity
-  ): Promise<Task> {
+  ): Promise<TaskDto> {
     this.logger.verbose(`User "${user.username}" creating a new task. Data: ${JSON.stringify(createTaskDto)}`);
     return this.tasksService.createTask(createTaskDto, user);
   }
@@ -47,7 +47,7 @@ export class TasksController {
   deleteTask(
     @Param('id', ParseIntPipe) id: number,
     @AuthUser() user: UserEntity
-  ): Promise<void> {
+  ): Promise<any> {
     return this.tasksService.deleteTask(id, user);
   }
 
@@ -56,7 +56,7 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
     @AuthUser() user: UserEntity
-  ): Promise<Task> {
+  ): Promise<TaskDto> {
     return this.tasksService.updateTaskStatus(id, status, user);
   }
 }

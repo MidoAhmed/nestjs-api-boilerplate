@@ -1,15 +1,13 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
+import { BaseEntity, Entity, Column, Unique, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { Task } from '../task/task.entity';
 import { UserRole } from './user-role.enum';
+import { AbstractEntity } from 'src/commun/abstract.entity';
+import { TaskEntity } from '../task/task.entity';
 
 
 @Entity({ name: 'user' })
 @Unique(['username'])
-export class UserEntity extends BaseEntity {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+export class UserEntity extends AbstractEntity {
 
   @Column({ unique: true, nullable: false })
   username: string;
@@ -29,8 +27,8 @@ export class UserEntity extends BaseEntity {
   @Column({default: '', nullable: true})
   phone?: string;
 
-  @OneToMany(type => Task, task => task.user, { eager: true, cascade: true})
-  tasks: Task[];
+  @OneToMany(type => TaskEntity, task => task.user, { eager: true, cascade: true})
+  tasks: TaskEntity[];
 
   @Column({
     type: "enum",
@@ -38,6 +36,7 @@ export class UserEntity extends BaseEntity {
     default: UserRole.GHOST
   })
   role: UserRole
+
   
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
