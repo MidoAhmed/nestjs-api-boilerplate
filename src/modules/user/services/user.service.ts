@@ -30,7 +30,6 @@ export class UserService {
                           .leftJoinAndSelect("user.tasks", "tasks")
                           .getMany();
 
-      // return users.map(item => plainToClass(UserDto, item));
       return plainToClass(UserDto, users);
     } catch (error) {
       this.logger.error(error.message, error.stack);

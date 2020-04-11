@@ -1,7 +1,7 @@
 import { BaseEntity, Entity, Column, ManyToOne } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { UserEntity } from '../user/user.entity';
-import { AbstractEntity } from '../../../src/commun/abstract.entity';
+import { AbstractEntity } from '../../commun/abstract.entity';
 
 @Entity({ name: 'task' })
 export class TaskEntity extends AbstractEntity{
