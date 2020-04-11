@@ -1,11 +1,10 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { BaseEntity, Entity, Column, ManyToOne } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
 import { UserEntity } from '../user/user.entity';
+import { AbstractEntity } from '../../commun/abstract.entity';
 
 @Entity({ name: 'task' })
-export class Task extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class TaskEntity extends AbstractEntity{
 
   @Column()
   title: string;
@@ -19,6 +18,7 @@ export class Task extends BaseEntity {
   @ManyToOne(type => UserEntity, user => user.tasks, { eager: false})
   user: UserEntity;
 
-  @Column()
+  @Column({nullable: true})
   userId: number;
+
 }

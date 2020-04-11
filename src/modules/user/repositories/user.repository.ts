@@ -12,7 +12,7 @@ export class UserRepository extends Repository<UserEntity> {
     private logger = new Logger('UserRepository');
 
     async createUser(createUserDto: CreateUserDto, user: UserEntity): Promise<UserDto> {
-        const { username, password, firstName, lastName, phone } = createUserDto;
+        const { username, password, firstName, lastName, phone, role } = createUserDto;
     
         const userEntity = new UserEntity();
         userEntity.username = username;
@@ -21,9 +21,10 @@ export class UserRepository extends Repository<UserEntity> {
         userEntity.firstName = firstName;
         userEntity.lastName = lastName;
         userEntity.phone = phone;
+        userEntity.role = role;
 
         try {
-          const  createdUser = await userEntity.save();
+          const  createdUser = await this.save(userEntity);
           return plainToClass(UserDto, createdUser);
         } catch (error) {
             this.logger.error(error.message, error.stack);

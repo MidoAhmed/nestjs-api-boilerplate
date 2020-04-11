@@ -1,11 +1,10 @@
-import { Exclude, Expose } from 'class-transformer';
-import { Task } from 'src/modules/task/task.entity';
+import { Exclude, Expose, Type } from 'class-transformer';
+import { UserRole } from '../user-role.enum';
+import { AbstractDto } from '../../../commun/dto/abstract.dto';
+import { TaskDto } from '../../task/dto/task.dto';
 
 @Exclude()
-export class UserDto {
-    
-    @Expose()
-    id: number;
+export class UserDto extends AbstractDto{
 
     @Expose()
     username: string;
@@ -24,9 +23,9 @@ export class UserDto {
     salt: string;
 
     @Expose()
-    tasks: Task[];
+    @Type(() => TaskDto)
+    tasks: TaskDto[];
 
-    /* constructor(props) {
-        Object.assign(this, props);
-    } */
+    @Expose()
+    role: UserRole;
 }

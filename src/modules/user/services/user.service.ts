@@ -30,7 +30,6 @@ export class UserService {
                           .leftJoinAndSelect("user.tasks", "tasks")
                           .getMany();
 
-      // return users.map(item => plainToClass(UserDto, item));
       return plainToClass(UserDto, users);
     } catch (error) {
       this.logger.error(error.message, error.stack);
@@ -44,12 +43,11 @@ export class UserService {
     if (!found) {
       throw new NotFoundException(`User with ID "${id}" not found`);
     }
-    
     return plainToClass(UserDto, found);
   }
 
   async deleteUser(id: number, user: UserEntity): Promise<any> {
-    const result = await this.userRepository.delete({ id });
+    const result = await this.userRepository.delete(id);
 
     if (result.affected === 0) {
       throw new NotFoundException(`User with ID "${id}" not found`);

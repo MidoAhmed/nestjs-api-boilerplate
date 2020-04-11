@@ -53,6 +53,7 @@ export class UserController {
   }
 
   @Put('/:id')
+  @UsePipes(ValidationPipe)
   updateUser(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,

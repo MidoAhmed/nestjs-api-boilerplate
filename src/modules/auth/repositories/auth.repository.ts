@@ -24,7 +24,7 @@ export class AuthRepository extends Repository<UserEntity> {
 
 
     try {
-      const  registredUser : UserEntity = await user.save();
+      const  registredUser : UserEntity = await this.save(user);
       return plainToClass(UserDto,  registredUser);
     } catch (error) {
       this.logger.error(error.message, error.stack);
