@@ -1,7 +1,7 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import { AbstractDto } from '../../../commun/dto/abstract.dto';
 import { TaskStatus } from '../task-status.enum';
-import { UserDto } from 'src/modules/user/dto/user.dto';
+import { UserDto } from '../../user/dto/user.dto';
 
 @Exclude()
 export class TaskDto extends AbstractDto{
