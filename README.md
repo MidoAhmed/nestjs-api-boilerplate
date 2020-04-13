@@ -50,6 +50,9 @@ npm start:dev
   <dt><b>Swagger Api Documentation</b></dt>
   <dd>Already integrated API documentation. To see all available endpoints visit http://localhost:3000/docs</dd>
 
+  <dt><b>Seeding Database</b></dt>
+  <dd>Awesome way to seed test data into your database using [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding)</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
 </dl>
