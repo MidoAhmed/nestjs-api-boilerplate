@@ -12,13 +12,17 @@ export class TaskEntity extends AbstractEntity{
   @Column()
   description: string;
 
-  @Column()
+  @Column({
+    type: "enum",
+    enum: TaskStatus,
+    default: TaskStatus.OPEN
+  })
   status: TaskStatus;
 
   @ManyToOne(type => UserEntity, user => user.tasks, { eager: false})
   user: UserEntity;
 
-  @Column({nullable: true})
+  @Column()
   userId: number;
 
 }

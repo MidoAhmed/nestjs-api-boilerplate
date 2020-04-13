@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '../repositories/user.repository';
-import { UsersDto } from '../dto/users.dto';
 import { UserEntity } from '../user.entity';
 import { UserDto } from '../dto/user.dto';
 import { CreateUserDto } from '../dto/create-user.dto';
@@ -21,13 +20,14 @@ export class UserService {
     @InjectRepository(UserRepository) private readonly userRepository: UserRepository,
   ) {}
 
-  async getUsers(): Promise<UserDto[]> {
+  async getUsers({page, limit}): Promise<UserDto[]> {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
     try {
       const users = await queryBuilder
-                          // .innerJoinAndSelect("user.tasks", "tasks")
                           .leftJoinAndSelect("user.tasks", "tasks")
+                          .skip(limit * (page-1))
+                          .take(limit)
                           .getMany();
 
       return plainToClass(UserDto, users);

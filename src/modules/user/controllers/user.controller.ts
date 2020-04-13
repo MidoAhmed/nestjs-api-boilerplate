@@ -11,6 +11,7 @@ import {
   Logger,
   UsePipes,
   Put,
+  Query,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -28,8 +29,16 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  getUsers(): Promise<UserDto[]> {
-    return this.userService.getUsers();
+  getUsers(
+    @Query('page') page = 1, 
+    @Query('limit') limit = 10,
+  ): Promise<UserDto[]> {
+    return this.userService.getUsers(
+      {
+        page,
+        limit
+      }
+    );
   }
 
   @Get('/:id')

@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker:up": "docker-compose -p nestjs-api-boilerplate up -d",
-    "docker:down": "docker-compose -p nestjs-api-boilerplate down"
+    "docker:down": "docker-compose -p nestjs-api-boilerplate down",
+    "seed:config": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js config -r src/database/config -n typeorm.config.ts",
+    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed -r src/database/config -n typeorm.config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",
@@ -41,13 +43,15 @@
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
     "swagger-ui-express": "^4.1.3",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.24",
+    "typeorm-seeding": "^1.4.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.13.2",
     "@nestjs/schematics": "^6.8.1",
     "@nestjs/testing": "^7.0.1",
     "@types/express": "^4.17.2",
+    "@types/faker": "^4.1.11",
     "@types/jest": "25.1.2",
     "@types/node": "^13.1.6",
     "@types/supertest": "^2.0.8",
