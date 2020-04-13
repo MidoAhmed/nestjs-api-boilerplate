@@ -12,18 +12,21 @@ Nestjs API Boilerplate: Typescript, Postgresql, TypeORM, Swagger for Api documen
 
 ```bash
 # 1. Clone the repository or click on "Use this template" button.
-git clone https://github.com/MidoAhmed/nestjs-api-boilerplate my-new-project
+git clone https://github.com/MidoAhmed/nestjs-api-boilerplate nestjs-api-boilerplate
 
 # 2. Enter your newly-cloned folder.
-cd my-new-project
+cd nestjs-api-boilerplate
 
 # 3. Install dependencies.
-npm
+npm i
 
-# 4. Run development server and open http://localhost:3000
-npm start:dev
+# 4. Run docker containers and open http://localhost:8080 (Adminer)
+npm run docker:up
 
-# 5. Read the documentation linked below for "Setup and development".
+# 5. Run development server and open http://localhost:3000
+npm run start:dev
+
+# 6. Read the documentation linked below for "Setup and development" (Sorry ! it is not yet available).
 ```
 
 ## Features
@@ -51,7 +54,7 @@ npm start:dev
   <dd>Already integrated API documentation. To see all available endpoints visit http://localhost:3000/docs</dd>
 
   <dt><b>Seeding Database</b></dt>
-  <dd>Awesome way to seed test data into your database using [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding)</dd>
+  <dd>Awesome way to seed test data into your database using typeorm-seeding</dd>
 
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
@@ -69,9 +72,9 @@ npm start:dev
   <dd>In-memory cache/ Redis</dd>
 </dl>
 
-## Documentation
+## Documentation [Sorry ! it is not yet available]
 
 This project includes a `docs` folder with more details on:
 
-1.  [Setup and development](#)
+1.  [Setup and development](#) 
 1.  [Architecture](#)
