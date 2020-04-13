@@ -43,7 +43,6 @@ export class TaskRepository extends Repository<TaskEntity> {
     const task = new TaskEntity();
     task.title = title;
     task.description = description;
-    task.status = TaskStatus.OPEN;
     task.user = user;
 
     try {
