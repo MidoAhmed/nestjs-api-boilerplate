@@ -3,6 +3,7 @@ db:
     username: 'your-postgres-username'
     password: 'your-postgres-password'
     synchronize: true
+    migrationsRun: false
   
 jwt:
     secret: 'secret-key'

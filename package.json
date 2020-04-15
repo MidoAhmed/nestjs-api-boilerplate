@@ -21,7 +21,12 @@
     "docker:up": "docker-compose -p nestjs-api-boilerplate up -d",
     "docker:down": "docker-compose -p nestjs-api-boilerplate down",
     "seed:config": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js config -r src/database/config -n typeorm.config.ts",
-    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed -r src/database/config -n typeorm.config.ts"
+    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed -r src/database/config -n typeorm.config.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:show": "npm run typeorm -- migration:show --config src/database/config/typeorm.config.ts",
+    "migration:generate": "npm run typeorm -- migration:generate --config src/database/config/typeorm.config.ts -n",
+    "migration:run": "npm run typeorm -- migration:run --config src/database/config/typeorm.config.ts",
+    "migration:revert": "npm run typeorm -- migration:revert --config src/database/config/typeorm.config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",

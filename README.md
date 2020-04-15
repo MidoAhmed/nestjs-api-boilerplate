@@ -56,6 +56,9 @@ npm run start:dev
   <dt><b>Seeding Database</b></dt>
   <dd>Awesome way to seed test data into your database using typeorm-seeding</dd>
 
+  <dt><b>Migrations</b></dt>
+  <dd>Already provided and configured npm script commands to run our migration process, see 'migrations.doc.txt'</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
 </dl>
