@@ -59,8 +59,12 @@ npm run start:dev
   <dt><b>Migrations</b></dt>
   <dd>Already provided and configured npm script commands to run our migration process, see 'migrations.doc.txt'</dd>
 
+  <dt><b>Caching</b></dt>
+  <dd>high performance data access using Redis store</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
+
 </dl>
 
 ## WIP/Comming Features
@@ -70,10 +74,6 @@ npm run start:dev
   <dd>Use a documentation generator for TypeScript projects such as or other alternative - https://typedoc.org/</dd>
 </dl>
 
-<dl>
-  <dt><b>Caching</b></dt>
-  <dd>In-memory cache/ Redis</dd>
-</dl>
 
 ## Documentation [Sorry ! it is not yet available]
 
