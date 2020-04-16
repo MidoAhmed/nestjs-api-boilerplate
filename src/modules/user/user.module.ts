@@ -9,7 +9,7 @@ import { AuthModule } from '../auth/auth.module';
     imports: [
         // forwardRef(() => AuthModule), it works like importing AuthModule
         TypeOrmModule.forFeature([UserRepository]),
-        AuthModule,
+        AuthModule
     ],
     controllers: [UserController],
     providers: [UserService],
