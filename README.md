@@ -61,6 +61,9 @@ npm run start:dev
 
   <dt><b>Caching</b></dt>
   <dd>high performance data access using Redis store</dd>
+  
+  <dt><b>Documentation</b></dt>
+  <dd>Already setup Compodoc</dd>
 
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
