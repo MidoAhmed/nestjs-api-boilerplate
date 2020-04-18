@@ -2,17 +2,22 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as config from 'config';
 import { setupSwagger } from './api-docs.swagger';
-import { Logger } from '@nestjs/common';
+import { Logger, NestApplicationOptions } from '@nestjs/common';
 import { TransformInterceptor } from './commun/interceptors/transform.interceptor';
 import { WrapInterceptor } from './commun/interceptors/wrap.interceptor';
 import * as helmet from 'helmet';
 import * as compression from 'compression';
 import * as rateLimit from 'express-rate-limit';
+import { WinstonModule } from 'nest-winston';
+import { winstonOptions } from './app-logging';
+
 
 async function bootstrap() {
-  const serverConfig = config.get('server');
-  const logger = new Logger('Bootstrap Logger');
-  const app = await NestFactory.create(AppModule);
+  const logger = (process.env.NODE_ENV === 'production') ? WinstonModule.createLogger(winstonOptions) : new Logger('Bootstrap Logger');
+  const nestAppOptions : NestApplicationOptions = {
+    logger :  logger
+  }
+  const app = await NestFactory.create(AppModule, nestAppOptions);  
 
   // global prefix
   app.setGlobalPrefix('api/v1');
@@ -36,6 +41,7 @@ async function bootstrap() {
 
 
   // listen on port
+  const serverConfig = config.get('server');
   const port = process.env.PORT || serverConfig.port;
 
   /**
