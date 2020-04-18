@@ -65,6 +65,9 @@ npm run start:dev
   <dt><b>Documentation</b></dt>
   <dd>Already setup Compodoc</dd>
 
+  <dt><b>Production grade logging system</b></dt>
+  <dd>Setup an external logger for production grade logging system - winston</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
 
