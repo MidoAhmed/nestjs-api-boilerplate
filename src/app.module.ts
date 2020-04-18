@@ -8,6 +8,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import * as redisStore from 'cache-manager-redis-store';
 import { WinstonModule } from 'nest-winston';
 import { winstonOptions } from './app-logging';
+import * as config from 'config';
+
 @Module({
   imports: [
     AuthModule, 
@@ -16,9 +18,10 @@ import { winstonOptions } from './app-logging';
     TypeOrmModule.forRoot(typeOrmConfig),
     CacheModule.register({
       store: redisStore,
-      host: 'localhost',
-      port: 6379,
-      ttl: 20
+      host: process.env.REDIS_HOST || config.get('redis').host,
+      port: process.env.REDIS_PORT || config.get('redis').port,
+      ttl: process.env.REDIS_TTL || config.get('redis').ttl,
+      max: process.env.REDIS_MAX || config.get('redis').max
     }),
     WinstonModule.forRoot(winstonOptions) 
   ],

@@ -8,4 +8,9 @@ db:
 
 jwt:
     expiresIn: 3600
-  
+
+redis:
+    host: 'localhost'
+    port: 6379
+    ttl: 20
+    max: 100
