@@ -1,0 +1,12 @@
+server:
+    origin: http://example.com
+
+db:
+    host: 'localhost'
+    username: 'your-postgres-username'
+    password: 'your-postgres-password'
+    migrationsRun: false
+    synchronize: false
+
+jwt:
+    secret: 'secret-key'
