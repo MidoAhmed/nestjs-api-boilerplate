@@ -2,6 +2,7 @@ import { Injectable, Logger, InternalServerErrorException} from '@nestjs/common'
 import * as AWS from 'aws-sdk';
 import * as config from 'config';
 import { IFile } from 'src/commun/interfaces';
+import { KeyDto } from '../dto/key.dto';
 
 @Injectable()
 export class AwsS3Service {
@@ -68,4 +69,19 @@ export class AwsS3Service {
         }
     }
 
+    async getFile(keyDto: KeyDto): Promise<any>{
+        try {
+            const {key} = keyDto;
+            const signedUrl = await this._s3.getSignedUrlPromise('getObject', {
+                    Bucket: process.env.S3_BUCKET_NAME  || config.get('awsS3').s3BucketName,
+                    Key: key
+                });
+                return {
+                    signedUrl: signedUrl
+                };
+        } catch (error) {
+            this.logger.error(error.message, error.stack);
+            throw new InternalServerErrorException(error.message, error);
+        }
+    }
 }

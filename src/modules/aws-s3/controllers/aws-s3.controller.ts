@@ -1,8 +1,9 @@
-import { Controller, UseGuards, Logger, Get, Param, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, UseGuards, Logger, Get, Param, Post, UseInterceptors, UploadedFile, Query, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AwsS3Service } from '../services/aws-s3.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IFile } from 'src/commun/interfaces';
+import { KeyDto } from '../dto/key.dto';
 
 @Controller('aws-s3')
 @UseGuards(AuthGuard())
@@ -28,4 +29,11 @@ export class AwsS3Controller {
              @UploadedFile() file: IFile): Promise<any>{
     return this.awsS3Service.uploadFile(bucketName, file);
   }
+
+  @Get('objects')
+  getFile(@Query(ValidationPipe) key: KeyDto) : Promise<any>{
+    return this.awsS3Service.getFile(key);
+  }
+
+
 }
