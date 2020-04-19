@@ -9,6 +9,7 @@ import { AuthModule } from '../auth/auth.module';
     AuthModule
 ],
   controllers: [AwsS3Controller],
-  providers: [AwsS3Service]
+  providers: [AwsS3Service],
+  exports: [AwsS3Service]
 })
 export class AwsS3Module {}

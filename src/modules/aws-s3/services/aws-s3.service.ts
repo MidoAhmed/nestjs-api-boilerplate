@@ -1,4 +1,4 @@
-import { Injectable, Logger, InternalServerErrorException, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, Logger, InternalServerErrorException} from '@nestjs/common';
 import * as AWS from 'aws-sdk';
 import * as config from 'config';
 import { IFile } from 'src/commun/interfaces';
