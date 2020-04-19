@@ -9,12 +9,14 @@ import * as redisStore from 'cache-manager-redis-store';
 import { WinstonModule } from 'nest-winston';
 import { winstonOptions } from './app-logging';
 import * as config from 'config';
+import { AwsS3Module } from './modules/aws-s3/aws-s3.module';
 
 @Module({
   imports: [
     AuthModule, 
     UserModule,
     TaskModule,
+    AwsS3Module,
     TypeOrmModule.forRoot(typeOrmConfig),
     CacheModule.register({
       store: redisStore,
