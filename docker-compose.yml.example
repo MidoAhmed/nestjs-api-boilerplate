@@ -29,3 +29,14 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  minio:
+    image: minio/minio
+    volumes:
+      - /Users/example/path/minio:/data
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server /data

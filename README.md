@@ -68,6 +68,9 @@ npm run start:dev
   <dt><b>Production grade logging system</b></dt>
   <dd>Setup an external logger for production grade logging system - winston</dd>
 
+  <dt><b>AWS S3</b></dt>
+  <dd>AWS SDK used for S3, tested with MinIO Server</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
 

@@ -1,3 +1,1 @@
-/**
- * shared interfaces
- */
+export * from './IFile';

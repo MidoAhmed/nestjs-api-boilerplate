@@ -34,7 +34,9 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # Config files
-config/*.yml
+config/default.yml
+config/development.yml
+config/production.yml
 
 # Docker files
 docker-compose.yml
