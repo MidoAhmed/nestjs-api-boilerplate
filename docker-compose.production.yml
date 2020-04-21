@@ -1,0 +1,84 @@
+
+version: '3.1'
+
+services:
+
+  nest-api:
+    env_file:
+      - .env
+    image: momo/nest-api-boilerplate
+    build:
+        context: .
+        dockerfile: Dockerfile
+        #target: production
+    container_name: nest-api
+    ports:
+        - ${SERVER_PORT}:${SERVER_PORT}
+    networks:
+        - nestjs-api-boilerplate_network
+    depends_on:
+        - redis
+        - postgres
+        - minio  
+
+  postgres:
+    container_name: nestjs-api-boilerplate_postgres
+    image: postgres
+    restart: always
+    networks:
+        - nestjs-api-boilerplate_network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${RDS_USERNAME}
+      POSTGRES_PASSWORD: ${RDS_PASSWORD}
+      POSTGRES_DB: ${RDS_DB_NAME}
+    ports: 
+      - ${RDS_PORT}:${RDS_PORT}
+  
+  redis:
+    container_name: nestjs-api-boilerplate_redis
+    image: redis
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    networks:
+      - nestjs-api-boilerplate_network
+    volumes:
+      - redis-data:/data
+    entrypoint: redis-server --appendonly yes
+    restart: always
+
+  adminer:
+    container_name: nestjs-api-boilerplate_adminer
+    image: adminer
+    restart: always
+    networks:
+      - nestjs-api-boilerplate_network
+    ports:
+      - ${ADMINER_PORT}:${ADMINER_PORT}
+
+  minio:
+    container_name: nestjs-api-boilerplate_minio
+    image: minio/minio
+    volumes:
+      - minio-data:/data
+    networks:
+      - nestjs-api-boilerplate_network
+    ports:
+      - ${AWS_S3_PORT}:${AWS_S3_PORT}
+    environment:
+      MINIO_ACCESS_KEY: ${AWS_S3_ACCESS_KEY_ID}
+      MINIO_SECRET_KEY: ${AWS_S3_SECRET_ACCESS_KEY}
+    command: server /data
+
+networks:
+  nestjs-api-boilerplate_network:
+    driver: bridge
+
+volumes:
+  minio-data:
+    driver: local
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local

@@ -42,7 +42,7 @@ async function bootstrap() {
 
   // listen on port
   const serverConfig = config.get('server');
-  const port = process.env.PORT || serverConfig.port;
+  const port = process.env.SERVER_PORT || serverConfig.port;
 
   /**
    * different deployment environments
