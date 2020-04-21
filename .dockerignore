@@ -21,3 +21,6 @@ obj
 secrets.dev.yaml
 values.dev.yaml
 README.md
+dist
+app.log
+migrations.doc.txt

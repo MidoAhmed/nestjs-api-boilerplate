@@ -18,7 +18,7 @@ describe('Auth Controller', () => {
         JwtModule.register({
           secret: mockJwtConfig.secret,
           signOptions: {
-            expiresIn: mockJwtConfig.expiresIn,
+            expiresIn: process.env.JWT_EXPIRATION_TIME || mockJwtConfig.expiresIn,
           },
         }),
       ],

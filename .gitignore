@@ -43,3 +43,6 @@ docker-compose.yml
 
 # Compodoc documentation
 documentation/
+
+# Envioroment variables
+.env
