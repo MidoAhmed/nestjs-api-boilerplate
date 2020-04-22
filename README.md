@@ -8,7 +8,7 @@ Nestjs API Boilerplate: Typescript, Postgresql, TypeORM, Swagger for Api documen
 
 > This is an a personal effort made with love to setup this architecture and dev environment for new node projects using [NestJS](https://nestjs.com).
 
-## Getting started
+## Getting started (development envioroment) 👍👍👍
 
 ```bash
 # 1. Clone the repository or click on "Use this template" button.
@@ -20,13 +20,36 @@ cd nestjs-api-boilerplate
 # 3. Install dependencies.
 npm i
 
-# 4. Run docker containers and open http://localhost:8080 (Adminer)
+# 4. fill in default.yml.example and development.yml.example files and rename it to default.yml and development.yml
+
+# 5. Run docker containers
 npm run docker:up
+# you can verify your DB by opening http://localhost:8080 (Adminer)
 
-# 5. Run development server and open http://localhost:3000
-npm run start:dev
+# 6. Run development server 
+npm run start:dev 
+# access swagger api doc by opening http://localhost:3000/docs
+🥳🥳🥳
 
-# 6. Read the documentation linked below for "Setup and development" (Sorry ! it is not yet available).
+# 7. Read the documentation linked below for "Setup and development" (Sorry ! it is not yet available).
+```
+
+## Deploy (production envioroment) 👍👍👍
+
+```bash
+# 1. fill in .env.example file and rename it to .env 
+
+# 2. Enter your project folder.
+cd nestjs-api-boilerplate
+
+# 2. Install dependencies.
+sh scripts/deploy.prod.sh 
+
+# 3. Enjoy it 🥳🥳🥳  you have your api up ! 😌
+
+# NB : 🤔 to shut down production 
+sh scripts/down.prod.sh
+
 ```
 
 ## Features

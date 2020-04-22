@@ -28,7 +28,10 @@
     "migration:run": "npm run typeorm -- migration:run --config src/database/config/typeorm.config.ts",
     "migration:revert": "npm run typeorm -- migration:revert --config src/database/config/typeorm.config.ts",
     "doc:generate": "npx compodoc -p tsconfig.json -n 'Nest api boilerplate documentation'",
-    "doc:serve": "npx compodoc -s --port 9000"
+    "doc:serve": "npx compodoc -s --port 9000",
+    "schema:sync": "npm run typeorm -- schema:sync --config src/database/config/typeorm.config.ts",
+    "schema:log": "npm run typeorm -- schema:log --config src/database/config/typeorm.config.ts",
+    "schema:drop": "npm run typeorm -- schema:drop --config src/database/config/typeorm.config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",
