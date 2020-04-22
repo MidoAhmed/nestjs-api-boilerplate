@@ -20,3 +20,5 @@ awsS3:
     awsS3AccessKeyId: 'your-access-key-username'
     awsS3SecretAccessKey: 'your-secret-access-key-username'
     s3BucketName: boilerplate-bucket
+
+#this file is for unit test purpose (for test env)

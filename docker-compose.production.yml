@@ -14,6 +14,7 @@ services:
     container_name: nest-api
     ports:
         - ${SERVER_PORT}:${SERVER_PORT}
+    command: ["sh" , "scripts/start-api.sh"]
     networks:
         - nestjs-api-boilerplate_network
     depends_on:
