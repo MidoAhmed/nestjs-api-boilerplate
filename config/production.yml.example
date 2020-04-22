@@ -1,0 +1,24 @@
+server:
+    origin: http://example.com
+
+db:
+    host: 'localhost'
+    username: 'your-postgres-username'
+    password: 'your-postgres-password'
+    migrationsRun: false
+    synchronize: false
+
+jwt:
+    secret: 'secret-key'
+
+redis:
+    host: 'localhost'
+    port: 6379
+    ttl: 20
+    max: 100
+
+awsS3:
+    endPoint: 'http://127.0.0.1:9000'
+    awsS3AccessKeyId: 'your-access-key-username'
+    awsS3SecretAccessKey: 'your-secret-access-key-username'
+    s3BucketName: boilerplate-bucket

@@ -12,18 +12,21 @@ Nestjs API Boilerplate: Typescript, Postgresql, TypeORM, Swagger for Api documen
 
 ```bash
 # 1. Clone the repository or click on "Use this template" button.
-git clone https://github.com/MidoAhmed/nestjs-api-boilerplate my-new-project
+git clone https://github.com/MidoAhmed/nestjs-api-boilerplate nestjs-api-boilerplate
 
 # 2. Enter your newly-cloned folder.
-cd my-new-project
+cd nestjs-api-boilerplate
 
 # 3. Install dependencies.
-npm
+npm i
 
-# 4. Run development server and open http://localhost:3000
-npm start:dev
+# 4. Run docker containers and open http://localhost:8080 (Adminer)
+npm run docker:up
 
-# 5. Read the documentation linked below for "Setup and development".
+# 5. Run development server and open http://localhost:3000
+npm run start:dev
+
+# 6. Read the documentation linked below for "Setup and development" (Sorry ! it is not yet available).
 ```
 
 ## Features
@@ -50,8 +53,27 @@ npm start:dev
   <dt><b>Swagger Api Documentation</b></dt>
   <dd>Already integrated API documentation. To see all available endpoints visit http://localhost:3000/docs</dd>
 
+  <dt><b>Seeding Database</b></dt>
+  <dd>Awesome way to seed test data into your database using typeorm-seeding</dd>
+
+  <dt><b>Migrations</b></dt>
+  <dd>Already provided and configured npm script commands to run our migration process, see 'migrations.doc.txt'</dd>
+
+  <dt><b>Caching</b></dt>
+  <dd>high performance data access using Redis store</dd>
+  
+  <dt><b>Documentation</b></dt>
+  <dd>Already setup Compodoc</dd>
+
+  <dt><b>Production grade logging system</b></dt>
+  <dd>Setup an external logger for production grade logging system - winston</dd>
+
+  <dt><b>AWS S3</b></dt>
+  <dd>AWS SDK used for S3, tested with MinIO Server</dd>
+
   <dt><b>Linter</b></dt>  
   <dd>tslint + eslint + prettier = ❤️</dd>
+
 </dl>
 
 ## WIP/Comming Features
@@ -61,9 +83,10 @@ npm start:dev
   <dd>Use a documentation generator for TypeScript projects such as or other alternative - https://typedoc.org/</dd>
 </dl>
 
-## Documentation
+
+## Documentation [Sorry ! it is not yet available]
 
 This project includes a `docs` folder with more details on:
 
-1.  [Setup and development](#)
+1.  [Setup and development](#) 
 1.  [Architecture](#)
